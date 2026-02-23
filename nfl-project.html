@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>NFL Offensive Evolution | Kenneth's Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .project-hero {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .sql-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .sql-block img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        .sql-caption {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+        .project-section {
+            margin-bottom: 3rem;
+        }
+        .project-section h3 {
+            border-bottom: 2px solid #1E3A5F;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.2rem;
+            color: #1E3A5F;
+        }
+        .tool-badge {
+            background-color: #1E3A5F;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .sidebar-brand-text, #sideNav .nav-link { color: #fff !important; }
+        .video-placeholder {
+            background-color: #f0f0f0;
+            border: 2px dashed #1E3A5F;
+            border-radius: 8px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1E3A5F;
+            font-size: 1.1rem;
+        }
+        .structure-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .structure-icon {
+            width: 40px;
+            font-size: 1.3rem;
+            color: #1E3A5F;
+        }
+    </style>
+</head>
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="index.html">
+            <span class="d-block d-lg-none">Back to Portfolio</span>
+            <span class="d-none d-lg-block">
+                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="Profile" />
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#contact">Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container-fluid p-0">
+        <section class="resume-section">
+            <div class="resume-section-content">
+
+                <!-- Title -->
+                <h1 class="mb-1" style="color:#1E3A5F;">NFL Offensive Evolution</h1>
+                <h4 class="text-muted mb-4">Run-First to Pass-First (2002–2025)</h4>
+                <div class="mb-3">
+                    <span class="tool-badge"><i class="fas fa-database me-1"></i>SQL</span>
+                    <span class="tool-badge"><i class="fas fa-server me-1"></i>PostgreSQL</span>
+                    <span class="tool-badge"><i class="fas fa-chart-bar me-1"></i>Power BI</span>
+                </div>
+
+                <!-- Hero Image -->
+                <img src="assets/img/field.jpg" class="project-hero" alt="NFL Stadium" />
+
+                <!-- Project Overview -->
+                <div class="project-section">
+                    <h3>Project Overview</h3>
+                    <p>This project explores how NFL offensive strategy has transformed over more than two decades. Using team-level game data from 2002 to 2025, I analyzed the league-wide shift from run-heavy offenses toward pass-dominated playcalling — and investigated whether that trend is beginning to reverse in recent seasons.</p>
+                    <p>The project involved building a PostgreSQL database from raw CSV data, writing complex SQL queries to extract meaningful trends, and presenting the findings through an interactive Power BI dashboard.</p>
+                </div>
+
+                <!-- Objective -->
+                <div class="project-section">
+                    <h3>Objective</h3>
+                    <p>To identify and quantify the evolution of NFL offensive strategy from 2002 to 2025 by analyzing passing and rushing statistics over time — examining league-wide trends, team-level patterns, and the relationship between offensive approach and winning.</p>
+                </div>
+
+                <!-- Features -->
+                <div class="project-section">
+                    <h3>Features</h3>
+                    <p><strong>Trend Analysis:</strong> Season-by-season tracking of passing and rushing yards per game across the entire league, revealing the long-term shift toward pass-heavy offenses.</p>
+                    <p><strong>Pass/Rush Ratio:</strong> A calculated metric showing how the balance between passing and rushing has evolved each season, making the strategic shift easy to quantify.</p>
+                    <p><strong>Team-Level Breakdown:</strong> Comparison of average passing and rushing stats per team across the full 2002–2025 period, highlighting which franchises leaned into each strategy.</p>
+                    <p><strong>Wins & Passing:</strong> Exploration of the relationship between passing volume and team success, testing whether throwing more actually correlates with winning.</p>
+                    <p><strong>Interactive Dashboard:</strong> All findings visualized in Power BI with filters, trend lines, and drill-down capabilities for deeper exploration.</p>
+                </div>
+
+                <!-- SQL Visualization Script -->
+                <div class="project-section">
+                    <h3>SQL Visualization Script</h3>
+
+                    <div class="sql-block">
+                        <img src="assets/img/nflsql1.jpg" alt="SQL Query 1" />
+                    </div>
+                    <p class="sql-caption">Query 1 — Calculates average passing yards per game for each season from 2002 to 2025, revealing the league-wide passing trend over time.</p>
+
+                    <div class="sql-block">
+                        <img src="assets/img/nflsql2.jpg" alt="SQL Query 2" />
+                    </div>
+                    <p class="sql-caption">Query 2 — Calculates average rushing yards per game per season, providing the counterpart to passing trends and showing how run volume has changed.</p>
+
+                    <div class="sql-block">
+                        <img src="assets/img/nflsql3.jpg" alt="SQL Query 3" />
+                    </div>
+                    <p class="sql-caption">Query 3 — Computes the pass-to-rush ratio per season, quantifying exactly how the balance between passing and running has shifted across eras.</p>
+
+                    <div class="sql-block">
+                        <img src="assets/img/nflsql4.jpg" alt="SQL Query 4" />
+                    </div>
+                    <p class="sql-caption">Query 4 — Aggregates each team's average passing and rushing yards across the full 2002–2025 period, enabling team-level strategic comparisons.</p>
+
+                    <div class="sql-block">
+                        <img src="assets/img/nflsql5.jpg" alt="SQL Query 5" />
+                    </div>
+                    <p class="sql-caption">Query 5 — Examines the relationship between passing volume and wins per season, testing whether a pass-heavy approach correlates with team success.</p>
+                </div>
+
+                <!-- Results -->
+                <div class="project-section">
+                    <h3>Results</h3>
+                    <p>The data confirmed a clear and sustained shift toward pass-heavy offenses from 2002 through approximately 2018, with passing yards per game rising significantly while rushing volume declined. However, an unexpected finding emerged in more recent seasons: the pass-to-rush ratio has begun to level off and slightly reverse, suggesting the NFL may be entering a new cyclical phase as defenses adapt to pass-heavy schemes.</p>
+                    <p>At the team level, significant variation exists — some franchises have consistently leaned on the pass while others maintained run-first identities across the full period. The wins analysis showed a moderate positive correlation between passing volume and winning, though the relationship is not absolute, indicating that scheme fit and execution matter as much as raw volume.</p>
+                    <p><strong>Recommendation:</strong> Teams looking to gain a competitive edge may find value in reintroducing balanced or run-first elements as the league overcorrects toward pass defense — a classic cyclical adaptation pattern in professional football.</p>
+                </div>
+
+                <!-- Project Demo -->
+                <div class="project-section">
+                    <h3>Project Demo</h3>
+                    <img src="assets/img/nfldashboard.png" alt="NFL Dashboard Preview" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <p class="text-muted mt-2" style="font-size: 0.9rem;"><i class="fas fa-info-circle me-1"></i>Dashboard video coming soon — static preview shown above.</p>
+                </div>
+
+                <!-- Project Structure -->
+                <div class="project-section">
+                    <h3>Project Structure</h3>
+                    <div class="structure-item">
+                        <div class="structure-icon"><i class="fas fa-file-csv"></i></div>
+                        <div><strong>Data</strong> — Raw CSV file containing NFL team game statistics from 2002 to 2025, sourced from Kaggle.</div>
+                    </div>
+                    <div class="structure-item">
+                        <div class="structure-icon"><i class="fas fa-database"></i></div>
+                        <div><strong>SQL / PostgreSQL</strong> — Database built in PostgreSQL 17. Queries written using CTEs, window functions, aggregations, and subqueries to extract and transform data for analysis.</div>
+                    </div>
+                    <div class="structure-item">
+                        <div class="structure-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div><strong>Power BI</strong> — Interactive dashboard built in Power BI Desktop, featuring trend lines, scatter plots, bar charts, and season/team filters for exploratory analysis.</div>
+                    </div>
+                </div>
+
+                <!-- Acknowledgements -->
+                <div class="project-section">
+                    <h3>Acknowledgements</h3>
+                    <p>Dataset sourced from Kaggle — <a href="https://www.kaggle.com/datasets/nickcantalupa/nfl-team-data-2003-2023" target="_blank">NFL Team Data 2003–2023 by Nick Cantalupa</a>. Thank you for making this data publicly available.</p>
+                </div>
+
+                <!-- GitHub Link -->
+                <div class="project-section">
+                    <a href="YOUR_GITHUB_REPO_LINK" class="btn btn-dark btn-lg" target="_blank">
+                        <i class="fab fa-github me-2"></i>View on GitHub
+                    </a>
+                    <a href="index.html#projects" class="btn btn-outline-secondary btn-lg ms-2">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
