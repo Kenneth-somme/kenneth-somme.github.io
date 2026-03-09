@@ -10970,3 +10970,8 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+.sql-block pre {
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 6px;
+}
