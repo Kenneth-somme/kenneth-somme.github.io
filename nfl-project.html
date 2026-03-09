@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
     <style>
         .project-hero {
             width: 100%;
@@ -140,32 +143,249 @@
 
                 <!-- SQL Visualization Script -->
                 <div class="project-section">
-                    <h3>SQL Visualization Script</h3>
-
+                    <h3>SQL Analysis Queries</h3>
+                
+                    <p class="sql-caption">Query 1 — [Your caption for the first query here]</p>
                     <div class="sql-block">
-                        <img src="assets/img/nflsql1.jpg" alt="SQL Query 1" />
+                        <pre><code class="language-sql">
+                WITH win_loss AS (
+                	SELECT
+                		season,
+                		week,
+                		home AS team,
+                		CASE
+                			WHEN score_home > score_away THEN 1
+                			WHEN score_home < score_away THEN 0
+                			ELSE 0.5
+                		END AS w_l,
+                		pen_num_home AS pen_num,
+                		pen_yards_home AS pen_yards,
+                		interceptions_away AS interceptions_for,
+                		interceptions_home AS interceptions_against,
+                		sacks_num_away AS sacks_forced,
+                		sacks_num_home AS sacks_recieved,
+                		pass_att_home AS pass_att,
+                		pass_comp_home AS pass_comp,
+                		pass_yards_home AS pass_yards,
+                		rush_att_home AS rush_att,
+                		rush_yards_home AS rush_yards,
+                		score_home AS points_for,
+                		score_away AS points_against,
+                		sacks_yards_home AS sack_yards
+                	FROM nfl_game_stats
+                	UNION ALL
+                	SELECT
+                		season,
+                		week,
+                		away,
+                		CASE
+                			WHEN score_away > score_home THEN 1
+                			WHEN score_away < score_home THEN 0
+                			ELSE 0.5
+                		END,
+                		pen_num_away,
+                		pen_yards_away,
+                		interceptions_home,
+                		interceptions_away,
+                		sacks_num_home,
+                		sacks_num_away,
+                		pass_att_away,
+                		pass_comp_away,
+                		pass_yards_away,
+                		rush_att_away,
+                		rush_yards_away,
+                		score_away,
+                		score_home,
+                		sacks_yards_away
+                	FROM nfl_game_stats
+                ), sorting AS(
+                	SELECT *
+                	FROM win_loss
+                	WHERE week NOT IN ('Conference', 'Wildcard', 'Superbowl', 'Division')
+                ), aggre AS (
+                	SELECT
+                		season,
+                		team,
+                		COUNT(*) AS games,
+                		SUM(w_l) AS w_l,
+                		SUM(pen_num) AS pen_num,
+                		SUM(pen_yards) AS pen_yards,
+                		SUM(interceptions_for) AS ints_for,
+                		SUM(interceptions_against) AS ints_against,
+                		SUM(pass_yards) AS pass_yards,
+                		SUM(pass_att) AS pass_att,
+                		SUM(pass_comp) AS pass_comp,
+                		SUM(rush_yards) AS rush_yards,
+                		SUM(rush_att) AS rush_att,
+                		SUM(sack_yards) AS sack_yards,
+                		SUM(sacks_forced) AS sacks_forced,
+                		SUM(sacks_recieved) AS sacks_recieved,
+                		SUM(points_for) AS points_for,
+                		SUM(points_against) AS points_against
+                	FROM sorting
+                	GROUP BY season, team
+                ), cleaning AS(
+                	SELECT 
+                		season,
+                		team,
+                		w_l AS wins,
+                		ROUND((w_l) / games, 3) AS w_l_pct,
+                		pen_num,
+                		pen_yards,
+                		ints_for - ints_against AS interception_differential,
+                		ROUND((pass_yards::NUMERIC + sack_yards) / pass_att, 1) AS pass_yards_per_attempt,
+                		ROUND(((pass_comp::NUMERIC / pass_att) * 100), 1)  AS pass_completion_percent,
+                		ROUND(rush_yards::NUMERIC / rush_att, 1) AS rush_yards_per_attempt,
+                		sacks_forced - sacks_recieved AS sacks_differential,
+                		points_for,
+                		points_against
+                	FROM aggre
+                )
+                SELECT *,
+                	CASE
+                		WHEN w_l_pct > 0.500 THEN 'Winning'
+                		ELSE 'Losing'
+                	END AS team_record
+                FROM cleaning
+                ORDER BY w_l_pct DESC;
+                        </code></pre>
                     </div>
-                    <p class="sql-caption">Query 1 — Calculates average passing yards per game for each season from 2002 to 2025, revealing the league-wide passing trend over time.</p>
-
+                
+                    <p class="sql-caption">Query 2 — [Your caption for the second query here]</p>
                     <div class="sql-block">
-                        <img src="assets/img/nflsql2.jpg" alt="SQL Query 2" />
+                        <pre><code class="language-sql">
+                            WITH win_loss AS (
+                            	SELECT
+                            		season,
+                            		week,
+                            		home AS team,
+                            		CASE
+                            			WHEN score_home > score_away THEN 1
+                            			WHEN score_home < score_away THEN 0
+                            			ELSE 0.5
+                            		END AS w_l,
+                            		pen_num_home AS pen_num,
+                            		pen_yards_home AS pen_yards,
+                            		interceptions_away AS interceptions_for,
+                            		interceptions_home AS interceptions_against,
+                            		sacks_num_away AS sacks_forced,
+                            		sacks_num_home AS sacks_recieved,
+                            		pass_att_home AS pass_att,
+                            		pass_comp_home AS pass_comp,
+                            		pass_yards_home AS pass_yards,
+                            		rush_att_home AS rush_att,
+                            		rush_yards_home AS rush_yards,
+                            		score_home AS points_for,
+                            		score_away AS points_against,
+                            		sacks_yards_home AS sack_yards
+                            	FROM nfl_game_stats
+                            	UNION ALL
+                            	SELECT
+                            		season,
+                            		week,
+                            		away,
+                            		CASE
+                            			WHEN score_away > score_home THEN 1
+                            			WHEN score_away < score_home THEN 0
+                            			ELSE 0.5
+                            		END,
+                            		pen_num_away,
+                            		pen_yards_away,
+                            		interceptions_home,
+                            		interceptions_away,
+                            		sacks_num_home,
+                            		sacks_num_away,
+                            		pass_att_away,
+                            		pass_comp_away,
+                            		pass_yards_away,
+                            		rush_att_away,
+                            		rush_yards_away,
+                            		score_away,
+                            		score_home,
+                            		sacks_yards_away
+                            	FROM nfl_game_stats
+                            ), sorting AS(
+                            	SELECT *
+                            	FROM win_loss
+                            	WHERE week NOT IN ('Conference', 'Wildcard', 'Superbowl', 'Division')
+                            ), aggre AS (
+                            	SELECT
+                            		season,
+                            		team,
+                            		COUNT(*) AS games,
+                            		SUM(w_l) AS w_l,
+                            		SUM(pen_num) AS pen_num,
+                            		SUM(pen_yards) AS pen_yards,
+                            		SUM(interceptions_for) AS ints_for,
+                            		SUM(interceptions_against) AS ints_against,
+                            		SUM(pass_yards) AS pass_yards,
+                            		SUM(pass_att) AS pass_att,
+                            		SUM(pass_comp) AS pass_comp,
+                            		SUM(rush_yards) AS rush_yards,
+                            		SUM(rush_att) AS rush_att,
+                            		SUM(sack_yards) AS sack_yards,
+                            		SUM(sacks_forced) AS sacks_forced,
+                            		SUM(sacks_recieved) AS sacks_recieved,
+                            		SUM(points_for) AS points_for,
+                            		SUM(points_against) AS points_against
+                            	FROM sorting
+                            	GROUP BY season, team
+                            ), cleaning AS ( 
+                            	SELECT 
+                            		season,
+                            		team,
+                            		w_l AS wins,
+                            		ROUND((w_l) / games, 3) AS w_l_pct,
+                            		pen_num,
+                            		pen_yards,
+                            		ints_for - ints_against AS interception_differential,
+                            		ROUND((pass_yards::NUMERIC + sack_yards) / pass_att, 1) AS pass_yards_per_attempt,
+                            		ROUND(((pass_comp::NUMERIC / pass_att) * 100), 1)  AS pass_completion_percent,
+                            		ROUND(rush_yards::NUMERIC / rush_att, 1) AS rush_yards_per_attempt,
+                            		sacks_forced - sacks_recieved AS sacks_differential,
+                            		points_for,
+                            		points_against
+                            	FROM aggre
+                            ), eras AS (
+                            	SELECT
+                            		season,
+                            		team,
+                            		wins,
+                            		w_l_pct,
+                            		pen_num,
+                            		pen_yards,
+                            		interception_differential,
+                            		pass_yards_per_attempt,
+                            		pass_completion_percent,
+                            		rush_yards_per_attempt,
+                            		sacks_differential,
+                            		points_for,
+                            		points_against,
+                            		CASE
+                            			WHEN season BETWEEN 2002 AND 2010 THEN 'Traditonal Era'
+                            			WHEN season BETWEEN 2011 AND 2017 THEN 'Passing revolution'
+                            			WHEN season BETWEEN 2018 AND 2025 THEN 'Modern analytics era'
+                            		END AS era
+                            	FROM cleaning
+                            	WHERE w_l_pct >0.500
+                            )
+                            SELECT
+                            	ROUND(AVG(wins), 2) AS wins,
+                            	ROUND(AVG(w_l_pct), 3) AS w_l_pct,
+                            	ROUND(AVG(pen_num), 2) AS pen_num,
+                            	ROUND(AVG(pen_yards), 2) AS pen_yards,
+                            	ROUND(AVG(interception_differential), 2) AS int_diff,
+                            	ROUND(AVG(pass_yards_per_attempt), 2) AS pass_yards_per_attempt,
+                            	ROUND(AVG(pass_completion_percent), 2) AS pass_completion_percent,
+                            	ROUND(AVG(rush_yards_per_attempt), 2) AS rush_yards_per_attempt,
+                            	ROUND(AVG(sacks_differential), 2) AS sacks_differential,
+                            	ROUND(AVG(points_for), 2) AS points_for,
+                            	ROUND(AVG(points_against), 2) AS points_against,
+                            	era
+                            FROM eras
+                            GROUP BY era;
+                        </code></pre>
                     </div>
-                    <p class="sql-caption">Query 2 — Calculates average rushing yards per game per season, providing the counterpart to passing trends and showing how run volume has changed.</p>
-
-                    <div class="sql-block">
-                        <img src="assets/img/nflsql3.jpg" alt="SQL Query 3" />
-                    </div>
-                    <p class="sql-caption">Query 3 — Computes the pass-to-rush ratio per season, quantifying exactly how the balance between passing and running has shifted across eras.</p>
-
-                    <div class="sql-block">
-                        <img src="assets/img/nflsql4.jpg" alt="SQL Query 4" />
-                    </div>
-                    <p class="sql-caption">Query 4 — Aggregates each team's average passing and rushing yards across the full 2002–2025 period, enabling team-level strategic comparisons.</p>
-
-                    <div class="sql-block">
-                        <img src="assets/img/nflsql5.jpg" alt="SQL Query 5" />
-                    </div>
-                    <p class="sql-caption">Query 5 — Examines the relationship between passing volume and wins per season, testing whether a pass-heavy approach correlates with team success.</p>
                 </div>
 
                 <!-- Results -->
@@ -222,5 +442,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>
